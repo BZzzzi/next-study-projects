@@ -2,6 +2,10 @@ import ProductList from "@/components/ProductList";
 import SearchForm from "@/components/SearchForm";
 import { getProductSearchItems } from "@/lib/api";
 
+export const metadata = {
+  title: "쇼핑몰 검색",
+};
+
 export default async function SearchPage({
   searchParams,
 }: {

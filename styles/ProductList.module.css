@@ -17,6 +17,13 @@
   border-radius: 10px;
 }
 
+.imgContain {
+  position: relative;
+  width: 100%;
+
+  height: 300px;
+}
+
 .image {
   width: 100%;
   aspect-ratio: 1/1;

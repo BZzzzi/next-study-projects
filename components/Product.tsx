@@ -24,13 +24,13 @@ export default function Product({
         <span className={styles.englishName}>{product.englishName}</span>
       </h1>
       <div className={styles.content}>
-        <div>
+        <div className={styles.imgContain}>
           <Image
             className={styles.image}
             src={product.imgUrl}
             alt={product.name}
-            width={800}
-            height={500}
+            fill
+            style={{ objectFit: "cover" }}
           />
         </div>
         <div>
