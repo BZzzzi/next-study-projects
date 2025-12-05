@@ -1,9 +1,7 @@
-import { useRouter } from "next/router";
 import MovieReviewList from "@/components/MovieReviewList";
 import styles from "@/styles/Movie.module.css";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { getMovieItem, getMovieReviews } from "@/lib/api";
+import { getMovieItem, getMovieReviews, getMovieItems } from "@/lib/api";
 import Head from "next/head";
 
 const labels = {
@@ -15,31 +13,23 @@ const labels = {
   },
 };
 
-export default function Movie() {
-  const router = useRouter();
-  const id = router.query["id"];
-  const [movie, setMovie] = useState(null);
-  const [review, setReview] = useState([]);
+export async function getServerSideProps(context) {
+  const id = context.params.id;
+  try {
+    const movie = await getMovieItem({ id });
+    const review = await getMovieReviews({ id });
+    return {
+      props: {
+        movie,
+        review,
+      },
+    };
+  } catch (error) {
+    return { notFound: true };
+  }
+}
 
-  useEffect(() => {
-    if (!id) return;
-    async function fetchMovies() {
-      const result = await getMovieItem({ id });
-      setMovie(result ?? null);
-    }
-    fetchMovies();
-  }, [id]);
-
-  useEffect(() => {
-    if (!id) return;
-    async function fetchMovieReviews() {
-      const result = await getMovieReviews({ id });
-      setReview(result ?? []);
-    }
-    fetchMovieReviews();
-  }, [id]);
-  if (!movie) return null;
-
+export default function Movie({ movie, review }) {
   return (
     <>
       <Head>
