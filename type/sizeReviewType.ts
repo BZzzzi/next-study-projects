@@ -1,17 +1,25 @@
 export interface SizeReviewItemType {
-  id: number; // 설문 고유 ID
-  sex: "male" | "female"; // 성별
-  height: number; // 키 (cm)
-  size: "S" | "M" | "L" | "XL"; // 구매한 사이즈
-  fit: "small" | "good" | "big"; // 착용감
-  productId: number; // 해당 설문이 속한 상품 ID
-  createdAt: string; // timestamp (ISO string)
-  updatedAt: string; // timestamp
+  id: number;
+  sex: "male" | "female";
+  height: number;
+  size: "S" | "M" | "L" | "XL";
+  fit: "small" | "good" | "big";
+  productId: number;
+  createdAt: string;
+  updatedAt: string;
 }
-
 export interface SizeReviewTypeItems {
   count: number;
   next: string | null;
   previous: string | null;
   results: SizeReviewItemType[];
+}
+
+// 제품 리뷰 POST 보낼 때 타입
+export interface SizeReviewRequest {
+  sex: "male" | "female";
+  height: number;
+  size: "S" | "M" | "L" | "XL";
+  fit: "small" | "good" | "big";
+  productId: number;
 }

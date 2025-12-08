@@ -1,11 +1,10 @@
-import { SizeReviewTypeItems } from "@/type/sizeReviewType";
+import { SizeReviewItemType } from "@/type/sizeReviewType";
 import styles from "@/styles/SizeReviewList.module.css";
 
 function formatDate(date: Date) {
   const MM = String(date.getUTCMonth() + 1).padStart(2, "0");
   const dd = String(date.getUTCDate()).padStart(2, "0");
   const YYYY = String(date.getUTCFullYear());
-
   return `${YYYY}. ${MM}. ${dd}.`;
 }
 
@@ -22,13 +21,13 @@ const labels = {
 };
 
 export default function SizeReviewList({
-  sizeReview,
+  sizeReviews,
 }: {
-  sizeReview: SizeReviewTypeItems;
+  sizeReviews: SizeReviewItemType[];
 }) {
   return (
     <ul className={styles.sizeReviewList}>
-      {sizeReview.results.map((sizeReview) => (
+      {sizeReviews.map((sizeReview) => (
         <li key={sizeReview.id} className={styles.sizeReview}>
           <div>
             <div className={styles.date}>

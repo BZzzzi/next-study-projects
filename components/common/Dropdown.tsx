@@ -2,28 +2,27 @@
 
 import { useEffect, useState, useRef } from "react";
 import styles from "@/components/common/Dropdown.module.css";
-import { Theme } from "@/lib/ThemeContext";
 
-interface Option {
-  value: Theme;
+interface Option<T> {
+  value: T;
   label: string;
 }
 
-interface DropdownProps {
+interface DropdownProps<T> {
   className?: string;
   name: string;
-  value: Theme;
-  options: Option[];
-  onChange: (name: string, value: Theme) => void;
+  value: T;
+  options: Option<T>[];
+  onChange: (name: string, value: T) => void;
 }
 
-export default function Dropdown({
+export default function Dropdown<T>({
   className = "",
   name,
   value,
   options,
   onChange,
-}: DropdownProps) {
+}: DropdownProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const inputRef = useRef<HTMLDivElement | null>(null);
 
@@ -73,7 +72,7 @@ export default function Dropdown({
           return (
             <div
               className={className}
-              key={option.value}
+              key={String(option.value)}
               onClick={() => onChange(name, option.value)}
             >
               {option.label}

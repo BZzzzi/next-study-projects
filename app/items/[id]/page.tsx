@@ -1,5 +1,5 @@
 import Product from "@/components/Product";
-import { getProductItem, getSizeReviewItems } from "@/lib/api";
+import { getProductItem, getProductItems, getSizeReviewItems } from "@/lib/api";
 
 export async function generateMetadata({
   params,
@@ -11,6 +11,15 @@ export async function generateMetadata({
   return {
     title: product.name,
   };
+}
+
+export async function generateStaticParams() {
+  const res = await getProductItems();
+  const products = res.results;
+
+  return products.map((item) => ({
+    id: item.id.toString(),
+  }));
 }
 
 export default async function ProductIdPage({
